@@ -1,0 +1,55 @@
+[project]
+name = "bqtools"
+version = "0.1.0"
+description = "BigQuery utility helpers (schema generation, table creation, schema-drift detection)"
+authors = [{ name = "David Skoland", email = "david.skoland@asterisk.digital" }]
+requires-python = ">=3.13"
+
+dependencies = [
+    "google-cloud-bigquery>=3.25.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff==0.15.7",
+    "pytest==9.0.2",
+    "tox==4.50.3",
+    "tox-uv==1.33.4",
+]
+
+[build-system]
+requires = ["setuptools==82.0.1", "wheel==0.46.3"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+# src-layout project
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+# include bqtools
+include = ["bqtools*"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.tox]
+requires = ["tox>=4"]
+env_list = ["py313"]
+
+[tool.tox.env_run_base]
+description = "Run tests with pytest"
+package = "editable"
+set_env = { PYTHONPATH = "{toxinidir}/src" }
+commands = [["pytest"]]
+
+[tool.ruff]
+line-length = 120
+lint.select = ["E", "F"]
+exclude = ["build", "dist", "venv", ".venv"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
