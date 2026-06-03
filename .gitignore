@@ -18,5 +18,8 @@
 # macOS stuff
 .DS_Store
 
+# Claude stuff
+/.claude/
+
 # App level cache
 /cache/
