@@ -2,21 +2,28 @@
 
 BigQuery utility helpers — schema generation from Python dicts, table creation, latest-row queries, and schema-drift detection.
 
-## Setup
+## Installing
 
-To set up the python environment you need `uv`, then run:
-```(bash)
-uv sync
+Add to your project's `pyproject.toml` dependencies:
+
+```
+"bqtools @ git+https://github.com/asterisk-digital/bqtools.git@main"
 ```
 
-## Usage
+The library can be used as follows:
 
-```python
+```(python)
 from google.cloud import bigquery
-from bqtools import make_bq_table, get_latest_bq_rows, check_schema_drift
+import bqtools
 
 client = bigquery.Client()
-make_bq_table(client, "project.dataset.table", {"id": 1, "name": "x"})
+bqtools.make_bq_table(client, "project.dataset.table", {"id": 1, "name": "x"})
+```
+
+## Development setup
+
+```(bash)
+uv sync
 ```
 
 ## Checks

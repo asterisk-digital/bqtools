@@ -1,7 +1,6 @@
 # Python stuff
 *.pyc
 /venv/
-__pycache__/
 
 # Jetbrains stuff
 /.idea/
@@ -18,12 +17,7 @@ __pycache__/
 .DS_Store
 
 /build/
-/dist/
 *.egg-info
 
 /cache/
-.tox/
-.pytest_cache/
-.ruff_cache/
-
-.claude/
+/.tox/

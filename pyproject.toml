@@ -3,53 +3,53 @@ name = "bqtools"
 version = "0.1.0"
 description = "BigQuery utility helpers (schema generation, table creation, schema-drift detection)"
 authors = [{ name = "David Skoland", email = "david.skoland@asterisk.digital" }]
-requires-python = ">=3.13"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
 
 dependencies = [
-    "google-cloud-bigquery>=3.25.0",
+  "google-cloud-bigquery>=3.25.0",
 ]
 
 [dependency-groups]
 dev = [
-    "ruff==0.15.7",
-    "pytest==9.0.2",
-    "tox==4.50.3",
-    "tox-uv==1.33.4",
+  "pytest>=8.0",
+  "ruff>=0.14",
+  "tox>=4.50",
+  "tox-uv>=1.14",
 ]
 
+# If you add CLIs later, uncomment and wire them up
+# [project.scripts]
+# bqtools = "bqtools.main:main"
+
 [build-system]
-requires = ["setuptools==82.0.1", "wheel==0.46.3"]
+requires = ["setuptools>=75", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-# src-layout project
-package-dir = {"" = "src"}
+package-dir = { "" = "src" }
 
 [tool.setuptools.packages.find]
 where = ["src"]
-# include bqtools
 include = ["bqtools*"]
 
 [tool.pytest.ini_options]
-minversion = "6.0"
+minversion = "8.0"
 addopts = "-ra"
 testpaths = ["tests"]
 
 [tool.tox]
-requires = ["tox>=4"]
-env_list = ["py313"]
+env_list = ["py311"]
 
 [tool.tox.env_run_base]
 description = "Run tests with pytest"
 package = "editable"
+dependency_groups = ["dev"]
 set_env = { PYTHONPATH = "{toxinidir}/src" }
-commands = [["pytest"]]
+commands = [["pytest", "{posargs:tests}"]]
 
 [tool.ruff]
 line-length = 120
+exclude = ["build", "dist", "venv"]
 lint.select = ["E", "F"]
-exclude = ["build", "dist", "venv", ".venv"]
-
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
